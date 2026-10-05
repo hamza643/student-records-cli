@@ -7,7 +7,7 @@ from models import Student
 
 
 def class_averages(students: list[Student]) -> dict[str, float]:
-    """Return the class average for each subject."""
+   
     grades_by_subject: dict[str, list[int]] = {}
     for student in students:
         for subject, grade in student.grades.items():
@@ -19,7 +19,7 @@ def class_averages(students: list[Student]) -> dict[str, float]:
 
 
 def best_and_worst(students: list[Student]) -> tuple[Student | None, Student | None]:
-    """Return (highest, lowest) student by average. Ignores students with no grades."""
+    
     graded = [s for s in students if s.average() is not None]
     if not graded:
         return None, None
@@ -27,7 +27,7 @@ def best_and_worst(students: list[Student]) -> tuple[Student | None, Student | N
 
 
 def grade_band(average: float) -> str:
-    """Return the band letter for an average: A, B, C or F."""
+
     if average >= 85:
         return "A"
     if average >= 70:
@@ -38,13 +38,13 @@ def grade_band(average: float) -> str:
 
 
 def band_counts(students: list[Student]) -> dict[str, int]:
-    """Count how many students fall in each band."""
+
     bands = [grade_band(s.average()) for s in students if s.average() is not None]
     return {letter: bands.count(letter) for letter in "ABCF"}
 
 
 def build_report(students: list[Student]) -> str:
-    """Build the full statistics text, including a timestamp."""
+
     highest, lowest = best_and_worst(students)
     lines = [
         f"Report generated: {datetime.now():%Y-%m-%d %H:%M:%S}",
