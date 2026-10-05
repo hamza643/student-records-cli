@@ -1,4 +1,6 @@
 .venv/
 __pycache__/
 *.pyc
-data/students.jsonreport.txt
+data/students.json
+data/*.bak
+report.txt
