@@ -7,7 +7,7 @@ A small command-line app to manage student records. Everything is saved in a JSO
 You need Python and Git. On Windows PowerShell:
 
 ```powershell
-git clone <https://github.com/hamza643/student-records-cli>
+git clone https://github.com/hamza643/student-records-cli
 cd student-records-cli
 py -m venv .venv
 .\.venv\Scripts\Activate.ps1
@@ -41,3 +41,7 @@ Bad input (wrong email, age outside 5-25, grade outside 0-100, letters instead o
 - Everything is loaded into memory and rewritten on every change. That's fine for a school data , but it would be slow with 100,000 students.
 
 - If students.json is corrupt, it is renamed to students.json.bak and the app starts empty, so no data is lost.
+
+## What I found hardest
+
+The hardest part was the setup on Windows. PowerShell blocked the venv script, my files kept saving inside `.venv`, and my Python 3.9 didn't support some type hints. 
