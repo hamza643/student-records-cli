@@ -11,7 +11,7 @@ DATA_FILE = Path(__file__).parent / "data" / "students.json"
 
 
 def load_data(path: Path = DATA_FILE) -> tuple[list[Student], int, str | None]:
-  
+    
     try:
         path.parent.mkdir(parents=True, exist_ok=True)
         if not path.exists():
@@ -22,7 +22,13 @@ def load_data(path: Path = DATA_FILE) -> tuple[list[Student], int, str | None]:
         students = [Student.from_dict(item) for item in raw["students"]]
         next_id = int(raw["next_id"])
     except (json.JSONDecodeError, KeyError, TypeError, ValueError):
-        return [], 1, "Data file is empty or corrupt. Starting with no students."
+        backup = path.with_name(path.name + ".bak")
+        try:
+            path.replace(backup)
+            note = f" The old file was kept as {backup.name}."
+        except OSError:
+            note = " The old file could not be backed up."
+        return [], 1, "Data file is empty or corrupt." + note + " Starting with no students."
     except OSError as error:
         return [], 1, f"Could not read data file: {error}"
     return students, max(next_id, max((s.id for s in students), default=0) + 1), None
