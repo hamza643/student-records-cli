@@ -6,7 +6,7 @@ from dataclasses import dataclass, field
 
 
 def validate_email(email: str) -> str:
-    """Return the cleaned email, or raise ValueError if it is invalid."""
+    
     email = email.strip()
     local, at, domain = email.partition("@")
     if not local or not at:
@@ -17,7 +17,7 @@ def validate_email(email: str) -> str:
 
 
 def validate_age(text: str) -> int:
-    """Convert text to a whole-number age between 5 and 25."""
+    
     try:
         age = int(text)
     except ValueError:
@@ -28,7 +28,7 @@ def validate_age(text: str) -> int:
 
 
 def validate_grade(text: str) -> int:
-    """Convert text to a whole-number grade between 0 and 100."""
+    
     try:
         grade = int(text)
     except ValueError:
@@ -39,7 +39,7 @@ def validate_grade(text: str) -> int:
 
 
 def validate_name(name: str) -> str:
-    """Return the cleaned name, or raise ValueError if it is empty."""
+   
     name = name.strip()
     if not name:
         raise ValueError("Name cannot be empty.")
@@ -48,7 +48,7 @@ def validate_name(name: str) -> str:
 
 @dataclass
 class Student:
-    """A single student record."""
+   
 
     id: int
     name: str
@@ -57,13 +57,13 @@ class Student:
     grades: dict[str, int] = field(default_factory=dict)
 
     def average(self) -> float | None:
-        """Return the average grade, or None if the student has no grades."""
+        
         if not self.grades:
             return None
         return sum(self.grades.values()) / len(self.grades)
 
     def to_dict(self) -> dict:
-        """Convert the student to a dict that can be saved as JSON."""
+        
         return {
             "id": self.id,
             "name": self.name,

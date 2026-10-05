@@ -1,4 +1,4 @@
-"""Load and save student records. All JSON file access lives here."""
+
 
 from __future__ import annotations
 
@@ -11,12 +11,7 @@ DATA_FILE = Path(__file__).parent / "data" / "students.json"
 
 
 def load_data(path: Path = DATA_FILE) -> tuple[list[Student], int, str | None]:
-    """Load students and the next free id from the JSON file.
-
-    Returns (students, next_id, warning). The file and its folder are
-    created if missing. If the file is empty or corrupt, an empty list is
-    returned with a warning message instead of crashing.
-    """
+  
     try:
         path.parent.mkdir(parents=True, exist_ok=True)
         if not path.exists():
@@ -34,10 +29,7 @@ def load_data(path: Path = DATA_FILE) -> tuple[list[Student], int, str | None]:
 
 
 def save_data(students: list[Student], next_id: int, path: Path = DATA_FILE) -> str | None:
-    """Save students and next_id to the JSON file.
-
-    Returns None on success, or an error message if saving failed.
-    """
+    
     payload = {"next_id": next_id, "students": [s.to_dict() for s in students]}
     try:
         path.parent.mkdir(parents=True, exist_ok=True)
@@ -46,3 +38,17 @@ def save_data(students: list[Student], next_id: int, path: Path = DATA_FILE) -> 
     except OSError as error:
         return f"Could not save data file: {error}"
     return None
+
+
+REPORT_FILE = Path(__file__).parent / "report.txt"
+
+
+def save_report(text: str, path: Path = REPORT_FILE) -> str | None:
+   
+    try:
+        with open(path, "w", encoding="utf-8") as f:
+            f.write(text + "\n")
+    except OSError as error:
+        return f"Could not write report: {error}"
+    return None
+
