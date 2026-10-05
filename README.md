@@ -40,3 +40,4 @@ Bad input (wrong email, age outside 5-25, grade outside 0-100, letters instead o
 
 - Everything is loaded into memory and rewritten on every change. That's fine for a school data , but it would be slow with 100,000 students.
 
+- If students.json is corrupt, it is renamed to students.json.bak and the app starts empty, so no data is lost.
